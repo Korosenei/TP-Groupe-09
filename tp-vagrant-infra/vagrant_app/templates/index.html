@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de contact</title>
+</head>
+<body>
+    <h1>Formulaire de contact</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <h2>Messages reçus :</h2>
+    <ul>
+        {% for contact in contacts %}
+            <li><strong>{{ contact.nom }}</strong> ({{ contact.email }}): {{ contact.message }}</li>
+        {% empty %}
+            <li>Aucun message pour le moment.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
